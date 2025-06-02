@@ -1,4 +1,7 @@
-export default function ErrorMessage({children}:{children: React.ReactNode}) {
+type ErrorMessageProps = {
+    children: React.ReactNode;
+}
+export default function ErrorMessage({children}:ErrorMessageProps) {
     return(
         <div>{children}</div>
     )
