@@ -42,7 +42,11 @@ export default function RegisterViews(){
                         placeholder="Email de Registro"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                         {...register('email',{
-                            required: 'email obligatorio'
+                            required: 'email obligatorio',
+                            pattern: {
+                                value: /\S+@\S+\.\S+/,
+                                message: "E-mail no válido",
+                            },
                         })}
                     />
                     {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
@@ -70,7 +74,10 @@ export default function RegisterViews(){
                         placeholder="Password de Registro"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                         {...register('password',{
-                            required: 'password obligatorio'
+                            required: 'password obligatorio',
+                            minLength:{
+                                value: 8, message: "Password debe contener al menos 8 caracteres"
+                            }
                         })}
                     />
                     {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
@@ -84,10 +91,10 @@ export default function RegisterViews(){
                         placeholder="Repetir Password"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                         {...register('password_confirmation',{
-                            required: 'password obligatorio'
+                            required: 'Repetir password obligatorio'
                         })}
                     />
-                    {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+                    {errors.password_confirmation && <ErrorMessage>{errors.password_confirmation.message}</ErrorMessage>}
 
                 </div>
 
