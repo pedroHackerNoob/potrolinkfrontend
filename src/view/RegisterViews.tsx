@@ -2,7 +2,14 @@ import {Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import ErrorMessage from "../components/ErrorMessage.tsx";
 export default function RegisterViews(){
-    const { register,handleSubmit, formState :{errors}} = useForm();
+    const initialValues = {
+        name: '',
+        email: '',
+        handle: '',
+        password: '',
+        password_confirmation: ''
+    }
+    const { register,handleSubmit, formState :{errors}} = useForm({defaultValues: initialValues});
     console.log(errors);
     const handleRegister = () => {
         console.log('desde handle register\n');
