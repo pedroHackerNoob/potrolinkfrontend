@@ -1,9 +1,11 @@
 import {Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
+import ErrorMessage from "../components/ErrorMessage.tsx";
 export default function RegisterViews(){
     const { register,handleSubmit, formState :{errors}} = useForm();
+    console.log(errors);
     const handleRegister = () => {
-        console.log('desde handle register\n',errors);
+        console.log('desde handle register\n');
     }
     return(
         <>
@@ -20,11 +22,10 @@ export default function RegisterViews(){
                         placeholder="Tu Nombre"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                         {...register('name',{
-                            required: 'nombre obligatorio',
-                            minLength: 3,
-                            maxLength: 20
+                            required: 'nombre obligatorio'
                         })}
                     />
+                    {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
                 </div>
                 <div className="grid grid-cols-1 space-y-3">
                     <label htmlFor="email" className="text-2xl text-slate-500">E-mail</label>
@@ -34,13 +35,11 @@ export default function RegisterViews(){
                         placeholder="Email de Registro"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                         {...register('email',{
-                            required: 'email obligatorio',
-                            pattern: {
-                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                                message: 'email invalido'
-                            }
+                            required: 'email obligatorio'
                         })}
                     />
+                    {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
+
                 </div>
                 <div className="grid grid-cols-1 space-y-3">
                     <label htmlFor="handle" className="text-2xl text-slate-500">Handle</label>
@@ -50,13 +49,11 @@ export default function RegisterViews(){
                         placeholder="Nombre de usuario: sin espacios"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                         {...register('handle',{
-                            required: 'handle obligatorio',
-                            pattern: {
-                                value: /^[a-zA-Z0-9_]+$/,
-                                message: 'handle invalido'
-                            }
+                            required: 'handle obligatorio'
                         })}
                     />
+                    {errors.handle && <ErrorMessage>{errors.handle.message}</ErrorMessage>}
+
                 </div>
                 <div className="grid grid-cols-1 space-y-3">
                     <label htmlFor="password" className="text-2xl text-slate-500">Password</label>
@@ -66,11 +63,10 @@ export default function RegisterViews(){
                         placeholder="Password de Registro"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                         {...register('password',{
-                            required: 'password obligatorio',
-                            minLength: 8,
-                            maxLength: 20
+                            required: 'password obligatorio'
                         })}
                     />
+                    {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
                 </div>
 
                 <div className="grid grid-cols-1 space-y-3">
@@ -81,11 +77,11 @@ export default function RegisterViews(){
                         placeholder="Repetir Password"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                         {...register('password_confirmation',{
-                            required: 'password obligatorio',
-                            minLength: 8,
-                            maxLength: 20
+                            required: 'password obligatorio'
                         })}
                     />
+                    {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+
                 </div>
 
                 <input
