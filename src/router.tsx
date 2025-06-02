@@ -1,6 +1,6 @@
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
-import {LoginView} from "./view/LoginViews.tsx";
-import {RegisterViews} from "./view/RegisterViews.tsx";
+import LoginView from "./view/LoginViews.tsx";
+import RegisterViews from "./view/RegisterViews.tsx";
 
 export default function Router(){
     return (

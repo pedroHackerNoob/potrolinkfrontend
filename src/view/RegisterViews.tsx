@@ -1,2 +1,6 @@
 
-export const RegisterViews = () => <div>Register View</div>;
+export default function RegisterViews(){
+    return(
+        <div>Register View</div>
+    )
+}

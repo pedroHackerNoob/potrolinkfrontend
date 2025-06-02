@@ -1,2 +1,6 @@
 
-export const LoginView = () => <div>Login View</div>;
+export default function LoginViews(){
+    return(
+        <div>login View</div>
+    )
+}
