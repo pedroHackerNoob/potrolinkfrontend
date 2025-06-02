@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import {useForm} from "react-hook-form";
 import ErrorMessage from "../components/ErrorMessage.tsx";
+
 export default function RegisterViews(){
     const initialValues = {
         name: '',
@@ -9,8 +10,8 @@ export default function RegisterViews(){
         password: '',
         password_confirmation: ''
     }
-    const { register,handleSubmit, formState :{errors}} = useForm({defaultValues: initialValues});
-    console.log(errors);
+    const { register,handleSubmit, watch, formState :{errors}} = useForm({defaultValues: initialValues});
+    const password = watch('password');
     const handleRegister = () => {
         console.log('desde handle register\n');
     }
@@ -91,7 +92,8 @@ export default function RegisterViews(){
                         placeholder="Repetir Password"
                         className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
                         {...register('password_confirmation',{
-                            required: 'Repetir password obligatorio'
+                            required: 'Repetir password obligatorio',
+                            validate: value => value === password || 'Password no coinciden'
                         })}
                     />
                     {errors.password_confirmation && <ErrorMessage>{errors.password_confirmation.message}</ErrorMessage>}
