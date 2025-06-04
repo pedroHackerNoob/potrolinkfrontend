@@ -3,6 +3,8 @@ import {useForm} from "react-hook-form";
 import ErrorMessage from "../components/ErrorMessage.tsx";
 import type {RegisterForm} from '../types'
 import axios,{isAxiosError} from "axios";
+import {toast} from 'sonner'
+
 
 export default function RegisterViews(){
     const initialValues = {
@@ -12,17 +14,19 @@ export default function RegisterViews(){
         password: '',
         password_confirmation: ''
     }
-    const { register,handleSubmit, reset,watch, formState :{errors}} = useForm<RegisterForm>({defaultValues: initialValues});
+    const { register,handleSubmit,watch, formState :{errors}} = useForm<RegisterForm>({defaultValues: initialValues});
     const password = watch('password');
 
     const handleRegister = async (formData : RegisterForm) => {
         try {
             const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`,formData)
+            toast.success(data)
             console.log(data)
-            reset()
+            // reset()
         }catch (error) {
             if(isAxiosError(error) && error.response){
                 console.log(error.response.data.error)
+                toast.error(error.response.data.error)
             }
         }
     }
@@ -34,7 +38,7 @@ export default function RegisterViews(){
                 className="bg-white px-5 py-20 rounded-lg space-y-10 mt-10"
             >
                 <div className="grid grid-cols-1 space-y-3">
-                    <label htmlFor="name" className="text-2xl text-slate-500">Nombre</label>
+                    <label htmlFor="name" className="text-2xl text-slate-500">Name</label>
                     <input
                         id="name"
                         type="text"
@@ -118,9 +122,7 @@ export default function RegisterViews(){
                 />
             </form>
             <nav className='mt-10'>
-                <Link className='text-center text-white text-lg block' to='/auth/login'>
-                    ya tienes cuenta? inicia sesion aqui
-                </Link>
+                <Link className=' bg-green-800 p-3 text-center text-white text-lg block rounded-lg' to='/auth/login'>Si tienes cuenta inicia sesion aqui</Link>
             </nav>
         </>
     )
