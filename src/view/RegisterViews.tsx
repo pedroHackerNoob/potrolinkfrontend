@@ -15,7 +15,7 @@ export default function RegisterViews(){
         password: '',
         password_confirmation: ''
     }
-    const { register,handleSubmit,watch, formState :{errors}} = useForm<RegisterForm>({defaultValues: initialValues});
+    const { register,reset,handleSubmit,watch, formState :{errors}} = useForm<RegisterForm>({defaultValues: initialValues});
     const password = watch('password');
 
     const handleRegister = async (formData : RegisterForm) => {
@@ -23,7 +23,7 @@ export default function RegisterViews(){
             const {data} = await api.post(`/auth/register`,formData)
             toast.success(data)
             console.log(data)
-            // reset()
+            reset()
         }catch (error) {
             if(isAxiosError(error) && error.response){
                 console.log(error.response.data.error)
